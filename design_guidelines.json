@@ -1,0 +1,136 @@
+{
+  "theme": "Light & Dark Toggle (Neo-Brutalist Pastel)",
+  "archetype": "3 (Pastel & Soft) mixed with Neo-Brutalist friction",
+  "typography": {
+    "fontFamily": "System",
+    "weights": {
+      "bold": "900",
+      "semiBold": "700",
+      "regular": "400"
+    },
+    "sizes": {
+      "h1": 40,
+      "h2": 32,
+      "h3": 24,
+      "h4": 20,
+      "body": 16,
+      "small": 14,
+      "tiny": 12
+    },
+    "letterSpacing": {
+      "tight": -1,
+      "normal": 0,
+      "wide": 2
+    }
+  },
+  "colors": {
+    "light": {
+      "background": "#FDFBF7",
+      "surface": "#FFFFFF",
+      "primary": "#FF90E8",
+      "secondary": "#90A8ED",
+      "accent": "#FFC900",
+      "text": "#0A0A0A",
+      "textMuted": "#52525B",
+      "border": "#0A0A0A",
+      "error": "#FF453A",
+      "success": "#32D74B"
+    },
+    "dark": {
+      "background": "#0F0F0F",
+      "surface": "#1A1A1A",
+      "primary": "#FF90E8",
+      "secondary": "#90A8ED",
+      "accent": "#FFC900",
+      "text": "#FAFAFA",
+      "textMuted": "#A1A1AA",
+      "border": "#FAFAFA",
+      "error": "#FF453A",
+      "success": "#32D74B"
+    }
+  },
+  "spacing": {
+    "xs": 4,
+    "sm": 8,
+    "md": 16,
+    "lg": 24,
+    "xl": 32,
+    "xxl": 48
+  },
+  "borders": {
+    "width": {
+      "default": 2,
+      "thick": 4
+    },
+    "radius": {
+      "none": 0,
+      "sm": 4,
+      "md": 8,
+      "lg": 12,
+      "round": 9999
+    }
+  },
+  "shadows": {
+    "neoBrutalist": {
+      "light": {
+        "shadowColor": "#0A0A0A",
+        "shadowOffset": { "width": 4, "height": 4 },
+        "shadowOpacity": 1,
+        "shadowRadius": 0,
+        "elevation": 5
+      },
+      "dark": {
+        "shadowColor": "#FF90E8",
+        "shadowOffset": { "width": 4, "height": 4 },
+        "shadowOpacity": 1,
+        "shadowRadius": 0,
+        "elevation": 5
+      }
+    }
+  },
+  "components": {
+    "buttons": {
+      "primary": {
+        "borderWidth": 2,
+        "borderRadius": 8,
+        "paddingVertical": 16,
+        "paddingHorizontal": 24,
+        "alignItems": "center",
+        "justifyContent": "center"
+      }
+    },
+    "inputs": {
+      "default": {
+        "borderWidth": 2,
+        "borderRadius": 8,
+        "padding": 16,
+        "fontSize": 16
+      }
+    },
+    "cards": {
+      "default": {
+        "borderWidth": 2,
+        "borderRadius": 12,
+        "padding": 24,
+        "marginBottom": 16
+      }
+    }
+  },
+  "media": {
+    "image_urls": {
+      "onboarding_background": "https://images.unsplash.com/photo-1767004595737-bf53d4398796?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzZ8MHwxfHNlYXJjaHwxfHxjYWxtJTIwbWluaW1hbGlzdCUyMGFic3RyYWN0fGVufDB8fHx8MTc3NDYyOTU0MXww&ixlib=rb-4.1.0&q=85",
+      "placeholder_abstract": "https://images.pexels.com/photos/7605372/pexels-photo-7605372.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+    }
+  },
+  "instructions_to_main_agent": [
+    "This is a React Native Expo application. MUST use StyleSheet for styling, do not use Tailwind classes.",
+    "The app has dark and light mode toggle. Ensure to use the React Native Appearance or a ThemeProvider to switch the colors provided.",
+    "Implement the Neo-Brutalist design: hard solid borders (borderWidth: 2), sharp corners or slight rounding (borderRadius: 8), and hard shadows (shadowOffset: { width: 4, height: 4 }, shadowOpacity: 1, shadowRadius: 0).",
+    "Fonts: Use standard React Native 'System' font but use bold weights for headings (fontWeight: '900') to give that strong brutalist typography feel.",
+    "Ensure the Waiting Period Timer feels dramatic and prominent on the screen.",
+    "The AI chat should have distinct chat bubbles for user vs AI. The AI should look authoritative (maybe Neo-Brutalist hard-edged bubbles).",
+    "Remember the key features: Google Social Login, Impulse Purchase Form, AI Chat to convince not to buy, Countdown Timer, Push notifications, and Purchase History.",
+    "Add 'testID' (the React Native equivalent for 'data-testid') props to all interactive elements for testing.",
+    "Do not use generic CSS or HTML elements."
+  ]
+}
