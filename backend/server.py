@@ -169,14 +169,15 @@ async def create_purchase(request: Request):
         prompt = f"""Item: {item_name}
 Cost: ${cost:.2f}
 
-Determine a cooling-off waiting period in hours. Guidelines:
-- Under $20: 1-6 hours
-- $20-$100: 6-24 hours
-- $100-$500: 24-72 hours
-- $500+: 72-168 hours
-Consider the item type. Necessities get shorter periods, luxuries get longer.
+The user is a young person who earns about $10 per week from chores. Money is tight and every dollar counts. Determine a generous cooling-off waiting period in hours so they really think it through. Guidelines based on how many weeks of income this costs:
+- Under $5 (less than half a week): 24-48 hours (1-2 days)
+- $5-$10 (about a week's income): 48-96 hours (2-4 days)
+- $10-$25 (1-2.5 weeks' income): 96-168 hours (4-7 days)
+- $25-$50 (2.5-5 weeks' income): 168-336 hours (7-14 days)
+- $50+ (over a month's income): 336-504 hours (14-21 days)
+Necessities get slightly shorter periods, but luxuries and wants should be on the longer end.
 
-Respond ONLY with valid JSON: {{"hours": <number>, "reason": "<brief encouraging reason, 1-2 sentences>"}}"""
+Respond ONLY with valid JSON: {{"hours": <number>, "reason": "<brief encouraging reason framed for a young saver, 1-2 sentences>"}}"""
 
         ai_response = await chat.send_message(UserMessage(text=prompt))
         logger.info(f"AI waiting period response: {ai_response}")
@@ -189,7 +190,7 @@ Respond ONLY with valid JSON: {{"hours": <number>, "reason": "<brief encouraging
         logger.error(f"AI error generating waiting period: {e}")
         result = {"hours": 24, "reason": "Let's give it a day to see if you really need this."}
 
-    hours = max(0.5, min(168, float(result.get("hours", 24))))
+    hours = max(1, min(504, float(result.get("hours", 48))))
     reason = str(result.get("reason", "Give yourself time to think it over."))
 
     now = datetime.now(timezone.utc)
@@ -285,22 +286,24 @@ async def send_chat(purchase_id: str, request: Request):
 
     history_section = f"Conversation so far:{nl}{history}" if history else "First message in this conversation."
 
-    system_msg = f"""You are a witty, empathetic financial advisor helping someone resist an impulse purchase. Adapt your personality based on what works best.
+    system_msg = f"""You are a friendly, encouraging financial advisor for a young person (13 years old) who earns about $10 per week from chores. Money is really tight for them.
 
 Purchase details:
 - Item: {purchase['item_name']}
 - Cost: ${purchase['cost']:.2f}
+- That's about {purchase['cost']/10:.1f} weeks of chore money!
 - Waiting period: {purchase['waiting_hours']} hours
 
 {history_section}
 
 Strategies to use:
-- Put cost in perspective ("That's X hours of work at minimum wage" or "X cups of coffee")
-- Suggest alternatives or waiting strategies
-- Ask thought-provoking questions
-- Use humor and relatable examples
-- Be supportive, not preachy
-- Keep responses to 2-4 sentences"""
+- Put the cost in "weeks of chores" terms ("That's X weeks of doing dishes and cleaning your room!")
+- Suggest saving up for something bigger or better
+- Ask if their friends actually care about this stuff
+- Mention what else they could do with the money (save for something really cool, a fun outing, etc.)
+- Be like a cool older sibling — supportive, real, a bit funny, never preachy
+- Keep responses to 2-3 sentences max
+- Use casual, age-appropriate language"""
 
     try:
         chat = LlmChat(

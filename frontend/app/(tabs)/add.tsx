@@ -78,6 +78,12 @@ export default function AddPurchaseScreen() {
       return `${h} hour${h !== 1 ? 's' : ''}`;
     }
     const days = Math.round(hours / 24);
+    if (days >= 7) {
+      const weeks = Math.floor(days / 7);
+      const remainDays = days % 7;
+      if (remainDays === 0) return `${weeks} week${weeks !== 1 ? 's' : ''}`;
+      return `${weeks}w ${remainDays}d`;
+    }
     return `${days} day${days !== 1 ? 's' : ''}`;
   };
 
